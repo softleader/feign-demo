@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-@ControllerAdvice
 @RestController
 public class TimeController implements TimeService {
 
@@ -27,23 +26,12 @@ public class TimeController implements TimeService {
     if (app != null && !this.app.equals(app)) {
       return client.now(app, params);
     }
-
     if (params.getEx() > 0) {
       throw new SpecifyStatusException(params.getEx());
     }
     Map<String, Object> resp = new HashMap<>();
     resp.put("now", LocalDateTime.now());
     resp.put("app", this.app);
-    if (params.isHostname()) {
-      resp.put("hostname", InetAddress.getLocalHost().getHostName());
-    }
     return resp;
-  }
-
-  @ExceptionHandler
-  public ResponseEntity<Object> exception(SpecifyStatusException ex) {
-    Map<String, Object> body = new HashMap<>();
-    body.put("message", String.format("response http status code should be %s", ex.getStatus()));
-    return ResponseEntity.status(ex.getStatus()).body(body);
   }
 }
