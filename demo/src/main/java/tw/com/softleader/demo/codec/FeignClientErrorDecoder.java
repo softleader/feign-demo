@@ -13,7 +13,7 @@ public class FeignClientErrorDecoder extends ErrorDecoder.Default {
   @Override
   public Exception decode(String methodKey, Response response) {
     try {
-      if (response.body() != null && response.body().length() > 0) {
+      if (response.body() != null) {
         String body = Util.toString(response.body().asReader());
         return new InternalClientException(
             FeignException.errorStatus(methodKey, response).getMessage(), response.status(), body);

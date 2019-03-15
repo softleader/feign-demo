@@ -27,7 +27,7 @@ public class TimeController implements TimeService {
       return client.now(app, params);
     }
     if (params.getEx() > 0) {
-      throw new SpecifyStatusException(params.getEx());
+      throw new SpecifyStatusException(this.app, params.getEx());
     }
     Map<String, Object> resp = new HashMap<>();
     resp.put("now", LocalDateTime.now());

@@ -13,6 +13,7 @@ import java.util.Map;
 @Getter
 @AllArgsConstructor
 public class SpecifyStatusException extends RuntimeException {
+  private String app;
   private int status;
 
   @ControllerAdvice
@@ -21,7 +22,10 @@ public class SpecifyStatusException extends RuntimeException {
     @ExceptionHandler
     public ResponseEntity<Object> handleException(SpecifyStatusException ex) {
       Map<String, Object> body = new HashMap<>();
-      body.put("message", String.format("response http status code should be %s", ex.getStatus()));
+      body.put(
+          "message",
+          String.format(
+              "throw by %s, response status code should be %s", ex.getApp(), ex.getStatus()));
       return ResponseEntity.status(ex.getStatus()).body(body);
     }
   }
