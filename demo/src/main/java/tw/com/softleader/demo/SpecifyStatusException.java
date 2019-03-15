@@ -19,6 +19,7 @@ public class SpecifyStatusException extends RuntimeException {
   @ControllerAdvice
   @RestController
   static class SpecifyStatusExceptionHandler {
+
     @ExceptionHandler
     public ResponseEntity<Object> handleException(SpecifyStatusException ex) {
       Map<String, Object> body = new HashMap<>();
