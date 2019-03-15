@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app1:
+    image: softleader/feign-demo
+    environment:
+      APP_NAME: app1
+      CLIENT_ADDR: app2
+    ports:
+      - 8080:80
+  app2:
+    image: softleader/feign-demo
+    environment:
+      APP_NAME: app2
+      CLIENT_ADDR: app3
+  app3:
+    image: softleader/feign-demo
+    environment:
+      APP_NAME: app3
+      CLIENT_ADDR: app1
