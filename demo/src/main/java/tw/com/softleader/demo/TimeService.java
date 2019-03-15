@@ -10,12 +10,11 @@ import java.util.Map;
 public interface TimeService {
 
   @GetMapping("/")
-  default Map<String, ?> now(@SpringQueryMap Params params) throws Exception {
+  default Map<String, ?> now(@SpringQueryMap Params params) {
     return now(null, params);
   }
 
   @GetMapping("/{app}")
   Map<String, ?> now(
-      @PathVariable(name = "app", required = false) String app, @SpringQueryMap Params params)
-      throws Exception;
+      @PathVariable(name = "app", required = false) String app, @SpringQueryMap Params params);
 }

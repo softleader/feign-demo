@@ -22,7 +22,7 @@ public class TimeController implements TimeService {
   private String app;
 
   @Override
-  public Map<String, ?> now(String app, Params params) throws Exception {
+  public Map<String, ?> now(String app, Params params) {
     if (app != null && !this.app.equals(app)) {
       return client.now(app, params);
     }
