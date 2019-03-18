@@ -25,10 +25,10 @@ GET /{app}
 
 ```sh
 # 在 app1 回復當前時間
-curl localhost:8080 -v
+$ curl localhost:8080 -v
 
 # 在 app3 回復當前時間
-curl localhost:8080/app3 -v
+$ curl localhost:8080/app3 -v
 ```
 
 ### QueryString
@@ -37,7 +37,7 @@ curl localhost:8080/app3 -v
 
 ```sh
 # 在 app2 丟出 exception, 並返回 417 status code
-curl localhost:8080/app2?ex=417 -v
+$ curl localhost:8080/app2?ex=417 -v
 ```
 
 ## Response the Root Cause to Client
@@ -67,15 +67,15 @@ $ make up
 約等待個 5~10 秒鐘, 可以使用以下指令測試, 若回應 200 則代表 app instances 已經就緒:
 
 ```sh
-curl localhost:8080 -v
+$ curl localhost:8080 -v
 ```
 
 你可以以 IDE 開啟並執行測試程式 [tw.com.softleader.demo.DemoApplicationTests](https://github.com/softleader/feign-demo/blob/master/demo/src/test/java/tw/com/softleader/demo/DemoApplicationTests.java), 或可直接透過 gradle command 執行:
 
 ```sh
 # 由指定層級回應 status code 200 及 response body
-gradle test --tests DemoApplicationTests.responseByEachApp -b demo/build.gradle --info
+$ gradle test --tests DemoApplicationTests.responseByEachApp -b demo/build.gradle --info
 
 # 在任何一層丟出 exception, 送到最外面時都要是當層丟出的 status code 及 response body
-gradle test --tests DemoApplicationTests.responseRootCauseByEachApp -b demo/build.gradle --info
+$ gradle test --tests DemoApplicationTests.responseRootCauseByEachApp -b demo/build.gradle --info
 ```
