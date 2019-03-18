@@ -1,0 +1,2 @@
+client:
+  addr: http://localhost:8080
