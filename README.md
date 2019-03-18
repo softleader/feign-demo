@@ -72,13 +72,13 @@ curl localhost:8080 -v
 
 若回應 200 則代表 app instances 已經就緒, 可以開始以下測試:
 
-- 由指定層級 status 200 的正常的 response 
+- 由指定層級回應 status code 200 及 response body
 
 ```sh
 gradle test --tests DemoApplicationTests.responseByEachApp -b demo/build.gradle --info
 ```
 
-- 不管指令哪一層丟出 exception, 最後都要接到當層丟出的 response body 及 status code
+- 在任何一層丟出 exception, 送到最外面時都要是當層丟出的 status code 及 response body
 
 ```sh
 gradle test --tests DemoApplicationTests.responseRootCauseByEachApp -b demo/build.gradle --info
