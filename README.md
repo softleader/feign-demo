@@ -58,28 +58,24 @@ public final ResponseEntity<?> exception(FeignException ex) {
 
 ### Test
 
-首先執行包版並以 docker 環境執行 3 個 app instance
+首先執行打包 image 並以 docker 環境執行 3 個 app instance
 
 ```sh
 $ make up
 ```
 
-約等待個 5~10 秒鐘, 可以使用以下指令測試:
+約等待個 5~10 秒鐘, 可以使用以下指令測試, 若回應 200 則代表 app instances 已經就緒:
 
 ```sh
 curl localhost:8080 -v
 ```
 
-若回應 200 則代表 app instances 已經就緒, 可以開始以下測試:
-
-- 由指定層級回應 status code 200 及 response body
+你可以以 IDE 開啟並執行測試程式 [tw.com.softleader.demo.DemoApplicationTests](https://github.com/softleader/feign-demo/blob/master/demo/src/test/java/tw/com/softleader/demo/DemoApplicationTests.java), 或可直接透過 gradle command 執行:
 
 ```sh
+# 由指定層級回應 status code 200 及 response body
 gradle test --tests DemoApplicationTests.responseByEachApp -b demo/build.gradle --info
-```
 
-- 在任何一層丟出 exception, 送到最外面時都要是當層丟出的 status code 及 response body
-
-```sh
+# 在任何一層丟出 exception, 送到最外面時都要是當層丟出的 status code 及 response body
 gradle test --tests DemoApplicationTests.responseRootCauseByEachApp -b demo/build.gradle --info
 ```
