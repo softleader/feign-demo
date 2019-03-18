@@ -7,7 +7,7 @@ A demo using spring-cloud-openfeign without Ribbon or Eureka
 - gradle
 - docker
 - docker-compose
-- make (optional, 沒有的話可直接打開 Makefile 跟著裡面的指令下)
+- make (optional, 沒有的話可打開 Makefile 直接執行對應的指令)
 
 ## Command
 
