@@ -44,12 +44,12 @@ curl localhost:8080/app2?ex=417 -v
 
 在微服務架構中, 真正的決定 reponse body 或 http status code 的可能是好幾層下的某個服務, 但以 feign 預設的模式只要 client 不是回覆 2xx 的 status code 就會被送到 [ErrorDecoder](https://github.com/OpenFeign/feign/blob/master/core/src/main/java/feign/codec/ErrorDecoder.java#L56) 做例外的處理: 封裝並丟出 feign.FeignException, 這樣會造成 UI 拿不到真正的回應內容
 
-因此可以透過註冊我們自己的 `@ExceptionHandler` 來解決這樣的問題:
+因此可以透過註冊我們自己的 [@ExceptionHandler](https://github.com/softleader/feign-demo/blob/master/demo/src/main/java/tw/com/softleader/demo/FeignExceptionHandler.java) 來解決這樣的問題:
 
 ```java
 @ExceptionHandler(FeignException.class)
 public final ResponseEntity<?> exception(FeignException ex) {
-  if (ex.content() != null) { // 這邊實作我們如何判斷 feign client 已經處理了 body 的邏輯
+  if (ex.content() != null) { // 這邊依照專案需求, 實作如何判斷 feign client 已經處理了 body 的邏輯
     return ResponseEntity.status(ex.status()).body(new RawValue(ex.contentUTF8()));
   }
   throw ex;
